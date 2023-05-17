@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>my page</title>
+    <meta name="description" content="写真日記" />
+    <meta property="og:title" content="写真日記" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="#" />
+    <meta property="og:site_name" content="写真日記" />
+    <meta property="og:description" content="写真日記" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="canonical" href="#" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/sanitize.css" />
+    <link
+      href="https://fonts.googleapis.com/earlyaccess/kokoro.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <!-- FirebaseUI の JavaScript の読み込み -->
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css"
+    />
+  </head>
+
+  <body>
+    <div class="firstArea">
+      <p>一般の方はこちら</p>
+      <button type="button" id="login">ログイン</button>
+      <p>職人の方はこちら</p>
+      <button type="button" id="login2">ログイン</button>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js"></script> -->
+
+    <script type="module">
+      const firebaseConfig = {
+        apiKey: "AIzaSyD35elexPRpTWGpTPLButa3_0-j-0sBMr0",
+        authDomain: "social-app-70653.firebaseapp.com",
+        projectId: "social-app-70653",
+        storageBucket: "social-app-70653.appspot.com",
+        messagingSenderId: "424247250561",
+        appId: "1:424247250561:web:3c3933d028e2043a16c780",
+      };
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+      import {
+        getAuth,
+        GoogleAuthProvider,
+        signInWithPopup,
+        signInWithRedirect,
+      } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+      const app = initializeApp(firebaseConfig);
+
+      const provider = new GoogleAuthProvider();
+      const auth = getAuth();
+      console.log(auth);
+      auth.languageCode = "ja";
+      console.log(provider);
+      $("#login").on("click", () => {
+        signInWithPopup(auth, provider)
+          // signInWithRedirect(auth, provider)
+          .then((result) => {
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            //この状態ではトークンを破棄。jsは異なるページで作用しない→ローカルストレージへ入れる必要がある。
+            const user = result.user;
+            const loginData = {
+              token: token,
+              username: user,
+            };
+            const jsonData = JSON.stringify(loginData);
+            localStorage.setItem("loginJoho", jsonData);
+            console.log(result);
+            window.location.href = "user.html";
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            const email = error.customData.email;
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            console.log(error);
+          });
+        const uiConfig = {
+          signInFlow: "popup",
+        };
+      });
+      $("#login2").on("click", () => {
+        signInWithPopup(auth, provider)
+          // signInWithRedirect(auth, provider)
+          .then((result) => {
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            //この状態ではトークンを破棄。jsは異なるページで作用しない→ローカルストレージへ入れる必要がある。
+            const user = result.user;
+            const loginData = {
+              token: token,
+              username: user,
+            };
+            const jsonData = JSON.stringify(loginData);
+            localStorage.setItem("loginJoho", jsonData);
+            console.log(result);
+            window.location.href = "shokunin.html";
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            const email = error.customData.email;
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            console.log(error);
+          });
+        const uiConfig = {
+          signInFlow: "popup",
+        };
+      });
+      const ui = new firebaseui.auth.AuthUI(firebase.auth());
+      ui.start("#firebaseui-auth-container", uiConfig);
+    </script>
+  </body>
+</html>
