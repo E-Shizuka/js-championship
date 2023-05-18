@@ -43,13 +43,35 @@ textarea {
 /*ーーーーーーーーーーー*/
 /*この下から記述*/
 /*ーーーーーーーーーーー*/
+.all {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.top-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.backimg {
+  background: url(../img/portfolio_img.PNG);
+  background-size: cover;
+  height: 30vh;
+  width: 100vw;
+  margin-top: 64px;
+  margin-bottom: 64px;
+}
 
 .firstArea {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .firstArea h2 {

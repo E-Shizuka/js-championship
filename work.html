@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>work</title>
+    <meta name="description" content="ポートフォリオ" />
+    <meta property="og:title" content="ポートフォリオ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="#" />
+    <meta property="og:site_name" content="ポートフォリオ" />
+    <meta property="og:description" content="ポートフォリオ" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="canonical" href="#" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/sanitize.css" />
+    <link
+      href="https://fonts.googleapis.com/earlyaccess/kokoro.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style3.css" />
+  </head>
+
+  <body>
+    <div class="portfolioArea">
+      <div class="artwork">
+        <div class="art-title">
+          <div>
+            <h2 id="art-t1"></h2>
+          </div>
+          <div class="editArea">
+            <button id="editButton1">編集</button>
+            <button id="saveButton1">保存</button>
+          </div>
+        </div>
+        <div class="portfolio">
+          <div class="picturezone">
+            <img id="image1" src="" />
+          </div>
+          <div class="textzone">
+            <p id="shoukai1"></p>
+            <p id="finish1"></p>
+          </div>
+        </div>
+      </div>
+      <div class="artwork">
+        <div class="art-title">
+          <div>
+            <h2 id="art-t2"></h2>
+          </div>
+          <div class="editArea">
+            <button id="editButton2">編集</button>
+            <button id="saveButton2">保存</button>
+          </div>
+        </div>
+        <div class="portfolio">
+          <div class="picturezone">
+            <img id="image2" src="" />
+          </div>
+          <div class="textzone">
+            <p id="shoukai2"></p>
+            <p id="finish2"></p>
+          </div>
+        </div>
+      </div>
+      <div class="artwork">
+        <div class="art-title">
+          <div>
+            <h2 id="art-t3"></h2>
+          </div>
+          <div class="editArea">
+            <button id="editButton3">編集</button>
+            <button id="saveButton3">保存</button>
+          </div>
+        </div>
+        <div class="portfolio">
+          <div class="picturezone">
+            <img id="image3" src="" />
+          </div>
+          <div class="textzone">
+            <p id="shoukai3"></p>
+            <p id="finish3"></p>
+          </div>
+        </div>
+      </div>
+      <div class="artwork">
+        <div class="art-title">
+          <div>
+            <h2 id="art-t4"></h2>
+          </div>
+          <div class="editArea">
+            <button id="editButton4">編集</button>
+            <button id="saveButton4">保存</button>
+          </div>
+        </div>
+        <div class="portfolio">
+          <div class="picturezone">
+            <img id="image4" src="" />
+          </div>
+          <div class="textzone">
+            <p id="shoukai4"></p>
+            <p id="finish4"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="go-btn">
+      <button type="button" id="go-back">前のページヘ戻る</button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script></script>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+      // 🔽 追加 / `9.2.0`の部分を↑のFirestoreから貼り付けたコードのバージョンに合わせる
+      import {
+        getFirestore,
+        getDocs,
+        collection,
+        addDoc, //ドキュメントを追加
+        serverTimestamp,
+        query, //手動で追加
+        orderBy, //手動で追加 条件の指定
+        onSnapshot, //手動で追加 並び替え
+      } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+      import {
+        getStorage,
+        ref,
+        uploadBytes,
+        getDownloadURL,
+        listAll,
+      } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyD35elexPRpTWGpTPLButa3_0-j-0sBMr0",
+        authDomain: "social-app-70653.firebaseapp.com",
+        projectId: "social-app-70653",
+        storageBucket: "social-app-70653.appspot.com",
+        messagingSenderId: "424247250561",
+        appId: "1:424247250561:web:3c3933d028e2043a16c780",
+      };
+
+      //firebaseガイドから引用
+      const app = initializeApp(firebaseConfig);
+      const storage = getStorage(app);
+      const db = getFirestore(app);
+      const q = query(collection(db, "work-post"), orderBy("time", "desc"));
+      async function getImageUrlFromStorage(
+        fileName1,
+        fileName2,
+        fileName3,
+        fileName4
+      ) {
+        const Image1 = ref(storage, fileName1);
+        const url1 = await getDownloadURL(Image1);
+        const Image2 = ref(storage, fileName2);
+        const url2 = await getDownloadURL(Image2);
+        const Image3 = ref(storage, fileName3);
+        const url3 = await getDownloadURL(Image3);
+        const Image4 = ref(storage, fileName4);
+        const url4 = await getDownloadURL(Image4);
+        console.log(url1, url2, url3, url4);
+        return { url1, url2, url3, url4 };
+      }
+
+      onSnapshot(q, async (querySnapshot) => {
+        const documents = [];
+
+        querySnapshot.docs.forEach(async (doc) => {
+          console.log(doc.id);
+          const document = {
+            id: doc.id,
+            data: doc.data(),
+          };
+
+          if (parseURLParams() === doc.id) {
+            documents.push(document);
+            console.log(document.data);
+
+            const fileName1 = document.data.fileName1;
+            const fileName2 = document.data.fileName2;
+            const fileName3 = document.data.fileName3;
+            const fileName4 = document.data.fileName4;
+            const { url1, url2, url3, url4 } = await getImageUrlFromStorage(
+              fileName1,
+              fileName2,
+              fileName3,
+              fileName4
+            );
+            const imageElement1 = `${url1}`;
+            const imageElement2 = `${url2}`;
+            const imageElement3 = `${url3}`;
+            const imageElement4 = `${url4}`;
+            console.log(imageElement1);
+
+            $("#image1").attr("src", imageElement1);
+            $("#image2").attr("src", imageElement2);
+            $("#image3").attr("src", imageElement3);
+            $("#image4").attr("src", imageElement4);
+            $("#art-t1").text(document.data.worktitle1);
+            $("#shoukai1").text(document.data.kaisetsu1);
+            $("#finish1").text(document.data.worktime1);
+            $("#art-t2").text(document.data.worktitle2);
+            $("#shoukai2").text(document.data.kaisetsu2);
+            $("#finish2").text(document.data.worktime2);
+            $("#art-t3").text(document.data.worktitle3);
+            $("#shoukai3").text(document.data.kaisetsu3);
+            $("#finish3").text(document.data.worktime3);
+            $("#art-t4").text(document.data.worktitle4);
+            $("#shoukai4").text(document.data.kaisetsu4);
+            $("#finish4").text(document.data.worktime4);
+          }
+        });
+      });
+
+      $(document).ready(function () {
+        parseURLParams();
+      });
+
+      // URLパラメータから画像のURLを取得して表示する
+      function parseURLParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get("id");
+        return id;
+      }
+
+      let isEditModeEnabled = false;
+      $(document).ready(function () {
+        $("#editButton1").click(function () {
+          if (isEditModeEnabled) {
+            disableEditMode();
+          } else {
+            enableEditMode();
+          }
+        });
+
+        $("#saveButton1").click(function () {
+          disableEditMode();
+          saveToFirebase();
+        });
+        // ページ読み込み時にデータを復元
+        restoreFromFirebase();
+      });
+
+      function enableEditMode() {
+        $("#art-t1, #shoukai, #finish").attr("contentEditable", "true");
+        $("#art-t1, #shoukai, #finish").css("background-color", "lightgray");
+        isEditModeEnabled = true;
+      }
+
+      function disableEditMode() {
+        $("#art-t1, #shoukai, #finish").removeAttr("contentEditable");
+        $("#art-t1, #shoukai, #finish").css("background-color", "transparent");
+        isEditModeEnabled = false;
+      }
+
+      function saveToFirebase() {
+        // Firebaseにデータを保存するコード
+
+        const postData = {
+          title: $("#art-t1").text(),
+          shoukai: $("#shoukai").text(),
+          finish: $("#finish").text(),
+        };
+        addDoc(collection(db, "art-post"), postData)
+          .then(() => {
+            console.log("データが正常に追加されました");
+          })
+          .catch((error) => {
+            console.error("データの追加中にエラーが発生しました", error);
+          });
+      }
+
+      function restoreFromFirebase() {
+        // "art-post"コレクションからデータを取得
+        getDocs(collection(db, "art-post"))
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              const data = doc.data();
+              $("#art-t1").text(data.title);
+              $("#shoukai").text(data.shoukai);
+              $("#finish").text(data.finish);
+            });
+          })
+          .catch((error) => {
+            console.error("データの取得中にエラーが発生しました", error);
+          });
+      }
+
+      let isEditModeEnabled2 = false;
+      $(document).ready(function () {
+        $("#editButton2").click(function () {
+          if (isEditModeEnabled2) {
+            disableEditMode2();
+          } else {
+            enableEditMode2();
+          }
+        });
+
+        $("#saveButton2").click(function () {
+          disableEditMode2();
+          saveToFirebase2();
+        });
+        // ページ読み込み時にデータを復元
+        restoreFromFirebase2();
+      });
+
+      function enableEditMode2() {
+        $("#art-t2, #shoukai2, #finish2").attr("contentEditable", "true");
+        $("#art-t2, #shoukai2, #finish2").css("background-color", "lightgray");
+        isEditModeEnabled2 = true;
+      }
+
+      function disableEditMode2() {
+        $("#art-t2, #shoukai2, #finish2").removeAttr("contentEditable");
+        $("#art-t2, #shoukai2, #finish2").css(
+          "background-color",
+          "transparent"
+        );
+        isEditModeEnabled2 = false;
+      }
+
+      function saveToFirebase2() {
+        // Firebaseにデータを保存するコード
+
+        const postData = {
+          title: $("#art-t2").text(),
+          shoukai: $("#shoukai2").text(),
+          finish: $("#finish2").text(),
+        };
+        addDoc(collection(db, "art-post2"), postData)
+          .then(() => {
+            console.log("データが正常に追加されました");
+          })
+          .catch((error) => {
+            console.error("データの追加中にエラーが発生しました", error);
+          });
+      }
+
+      function restoreFromFirebase2() {
+        // "art-post"コレクションからデータを取得
+        getDocs(collection(db, "art-post2"))
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              const data = doc.data();
+              $("#art-t2").text(data.title);
+              $("#shoukai2").text(data.shoukai);
+              $("#finish2").text(data.finish);
+            });
+          })
+          .catch((error) => {
+            console.error("データの取得中にエラーが発生しました", error);
+          });
+      }
+
+      let isEditModeEnabled3 = false;
+      $(document).ready(function () {
+        $("#editButton3").click(function () {
+          if (isEditModeEnabled3) {
+            disableEditMode3();
+          } else {
+            enableEditMode3();
+          }
+        });
+
+        $("#saveButton3").click(function () {
+          disableEditMode3();
+          saveToFirebase3();
+        });
+        // ページ読み込み時にデータを復元
+        restoreFromFirebase3();
+      });
+
+      function enableEditMode3() {
+        $("#art-t3, #shoukai3, #finish3").attr("contentEditable", "true");
+        $("#art-t3, #shoukai3, #finish3").css("background-color", "lightgray");
+        isEditModeEnabled3 = true;
+      }
+
+      function disableEditMode3() {
+        $("#art-t3, #shoukai3, #finish3").removeAttr("contentEditable");
+        $("#art-t3, #shoukai3, #finish3").css(
+          "background-color",
+          "transparent"
+        );
+        isEditModeEnabled3 = false;
+      }
+
+      function saveToFirebase3() {
+        // Firebaseにデータを保存するコード
+
+        const postData = {
+          title: $("#art-t3").text(),
+          shoukai: $("#shoukai3").text(),
+          finish: $("#finish3").text(),
+        };
+        addDoc(collection(db, "art-post3"), postData)
+          .then(() => {
+            console.log("データが正常に追加されました");
+          })
+          .catch((error) => {
+            console.error("データの追加中にエラーが発生しました", error);
+          });
+      }
+
+      function restoreFromFirebase3() {
+        // "art-post"コレクションからデータを取得
+        getDocs(collection(db, "art-post3"))
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              const data = doc.data();
+              $("#art-t3").text(data.title);
+              $("#shoukai3").text(data.shoukai);
+              $("#finish3").text(data.finish);
+            });
+          })
+          .catch((error) => {
+            console.error("データの取得中にエラーが発生しました", error);
+          });
+      }
+
+      let isEditModeEnabled4 = false;
+      $(document).ready(function () {
+        $("#editButton4").click(function () {
+          if (isEditModeEnabled4) {
+            disableEditMode4();
+          } else {
+            enableEditMode4();
+          }
+        });
+
+        $("#saveButton4").click(function () {
+          disableEditMode4();
+          saveToFirebase4();
+        });
+        // ページ読み込み時にデータを復元
+        restoreFromFirebase4();
+      });
+
+      function enableEditMode4() {
+        $("#art-t4, #shoukai4, #finish4").attr("contentEditable", "true");
+        $("#art-t4, #shoukai4, #finish4").css("background-color", "lightgray");
+        isEditModeEnabled4 = true;
+      }
+
+      function disableEditMode4() {
+        $("#art-t4, #shoukai4, #finish4").removeAttr("contentEditable");
+        $("#art-t4, #shoukai4, #finish4").css(
+          "background-color",
+          "transparent"
+        );
+        isEditModeEnabled4 = false;
+      }
+
+      function saveToFirebase4() {
+        // Firebaseにデータを保存するコード
+
+        const postData = {
+          title: $("#art-t4").text(),
+          shoukai: $("#shoukai4").text(),
+          finish: $("#finish4").text(),
+        };
+        addDoc(collection(db, "art-post4"), postData)
+          .then(() => {
+            console.log("データが正常に追加されました");
+          })
+          .catch((error) => {
+            console.error("データの追加中にエラーが発生しました", error);
+          });
+      }
+
+      function restoreFromFirebase4() {
+        // "art-post"コレクションからデータを取得
+        getDocs(collection(db, "art-post4"))
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              const data = doc.data();
+              $("#art-t4").text(data.title);
+              $("#shoukai4").text(data.shoukai);
+              $("#finish4").text(data.finish);
+            });
+          })
+          .catch((error) => {
+            console.error("データの取得中にエラーが発生しました", error);
+          });
+      }
+      $(document).ready(function () {
+        $("#go-back").click(function () {
+          window.location.href = "portfolio.html";
+        });
+      });
+    </script>
+  </body>
+</html>

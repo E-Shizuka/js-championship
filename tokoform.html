@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>投稿フォーム</title>
+    <meta name="description" content="ポートフォリオ" />
+    <meta property="og:title" content="ポートフォリオ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="#" />
+    <meta property="og:site_name" content="ポートフォリオ" />
+    <meta property="og:description" content="ポートフォリオ" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="canonical" href="#" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/sanitize.css" />
+    <link
+      href="https://fonts.googleapis.com/earlyaccess/kokoro.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style2.css" />
+  </head>
+
+  <body>
+    <div class="all">
+      <div>
+        <button type="button" id="logout">ログアウトする</button>
+      </div>
+      <div class="top-box">
+        <h1>portfolioアプリ</h1>
+        <p>
+          このアプリはこれまで作成した作品のポートフォリオをweb上で作成できます。
+          <br />また、他の方のポートフォリオを見ることもできます。
+        </p>
+      </div>
+      <div class="box">
+        <h2>使い方</h2>
+        <p>
+          作品投稿フォームより投稿すると簡単な名刺の形でポートフォリオカードを作成することができます。
+          <br />作品一覧からポートフォリオカード一覧へアクセスし、ポートフォリオカードをタップすることで
+          <br />個別の作品の詳細ページヘリンクさせることができます。
+        </p>
+        <p>
+          　以下の作品投稿フォームより投稿してください。
+          <br />　　①作者名はGoogleアカウントの名前が自動で適用されます。
+          <br />　　②紹介する4点の作品の写真を選んでください。
+          <br />　　※1つのポートフォリオカードで紹介できる作品は4点です。
+          <br />　　※仕様上必ず4点写真をアップロードしてください。
+          <br />　　③作品の紹介を簡単に記載してください。
+        </p>
+      </div>
+      <div class="box">
+        <h2>作品投稿フォーム</h2>
+        <div class="inputArea">
+          <div class="toko-1">
+            <div class="toko-1-1">
+              <p>作者：</p>
+              <p id="nameP"></p>
+            </div>
+            <div class="toko-1-1a">
+              <p>作品のグループ名：</p>
+              <input type="text" id="titleP" />
+            </div>
+          </div>
+          <div class="toko-1">
+            <!--画像アップロード-->
+            <div class="A">
+              <div class="toko-1-2">
+                作品写真1　<input type="file" id="picture1" />
+              </div>
+              <div class="w-time">
+                <p>この作品のタイトル</p>
+                <input type="text" id="worktitle1" />
+              </div>
+              <div class="kaisetuArea">
+                <p>この作品の紹介文</p>
+                <textarea id="kaisetsu1" rows="5"></textarea>
+              </div>
+              <div class="w-time">
+                <p>制作年月　(月は数字2桁で記入してください)</p>
+                <input type="text" id="worktime1" />
+              </div>
+            </div>
+            <div class="B">
+              <div class="toko-1-2">
+                作品写真2　<input type="file" id="picture2" />
+              </div>
+              <div class="w-time">
+                <p>この作品のタイトル</p>
+                <input type="text" id="worktitle2" />
+              </div>
+              <div class="kaisetuArea">
+                <p>この作品の紹介文</p>
+                <textarea id="kaisetsu2" rows="5"></textarea>
+              </div>
+              <div class="w-time">
+                <p>制作年月　(月は数字2桁で記入してください)</p>
+                <input type="text" id="worktime2" />
+              </div>
+            </div>
+            <div class="A">
+              <div class="toko-1-2">
+                作品写真3　<input type="file" id="picture3" />
+              </div>
+              <div class="w-time">
+                <p>この作品のタイトル</p>
+                <input type="text" id="worktitle3" />
+              </div>
+              <div class="kaisetuArea">
+                <p>この作品の紹介文</p>
+                <textarea id="kaisetsu3" rows="5"></textarea>
+              </div>
+              <div class="w-time">
+                <p>制作年月　(月は数字2桁で記入してください)</p>
+                <input type="text" id="worktime3" />
+              </div>
+            </div>
+            <div class="B">
+              <div class="toko-1-2">
+                作品写真4　<input type="file" id="picture4" />
+              </div>
+              <div class="w-time">
+                <p>この作品のタイトル</p>
+                <input type="text" id="worktitle4" />
+              </div>
+              <div class="kaisetuArea">
+                <p>この作品の紹介文</p>
+                <textarea id="kaisetsu4" rows="5"></textarea>
+              </div>
+              <div class="w-time">
+                <p>制作年月　(月は数字2桁で記入してください)</p>
+                <input type="text" id="worktime4" />
+              </div>
+            </div>
+          </div>
+          <div class="toko-2">
+            <!--テキスト入力-->
+            <div class="toko-2-1">
+              <p>4つの作品を一言でまとめると…。</p>
+              <textarea rows="2" id="work-comment"></textarea>
+            </div>
+            <!--送信ボタン-->
+            <div class="toko-2-1">
+              <button type="button" id="send">送信する</button>
+            </div>
+          </div>
+        </div>
+        <div class="go-btn">
+          <button type="button" id="go-portfolio">作品広場へ</button>
+        </div>
+        <script type="module" src="firebase.js"></script>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+      // 日時をいい感じの形式にする関数 自分で作る時はライブラリから持ってきたほうがいい
+      function convertTimestampToDatetime(timestamp) {
+        const _d = timestamp ? new Date(timestamp * 1000) : new Date();
+        const Y = _d.getFullYear();
+        const m = (_d.getMonth() + 1).toString().padStart(2, "0");
+        const d = _d.getDate().toString().padStart(2, "0");
+        const H = _d.getHours().toString().padStart(2, "0");
+        const i = _d.getMinutes().toString().padStart(2, "0");
+        const s = _d.getSeconds().toString().padStart(2, "0");
+        return `${Y}/${m}/${d} ${H}:${i}:${s}`;
+      }
+    </script>
+  </body>
+</html>

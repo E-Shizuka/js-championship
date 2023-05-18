@@ -43,6 +43,29 @@ textarea {
 /*ーーーーーーーーーーー*/
 /*この下から記述*/
 /*ーーーーーーーーーーー*/
+a {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+.top-box {
+  margin-bottom: 64px;
+}
+
+.box {
+  margin-bottom: 64px;
+}
+
+.all {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 64px;
+  margin-right: 64px;
+}
 
 .firstArea {
   display: flex;
@@ -70,13 +93,6 @@ textarea {
   margin-right: 8px;
 }
 
-.titleBox {
-  text-align: center;
-  font-size: 2em;
-  background: url(../img/keshiki-5.jpg);
-  background-size: cover;
-}
-
 .inputArea {
   background-color: rgb(253, 240, 232);
 }
@@ -84,8 +100,12 @@ textarea {
 .toko-1 {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: inherit;
+  flex-direction: column;
   padding-top: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
 }
 
 .toko-1-1 {
@@ -108,8 +128,51 @@ textarea {
   min-width: 25%;
 }
 
+.A {
+  background-color: rgb(234, 241, 241);
+}
+
+.B {
+  background-color: rgb(249, 249, 249);
+}
+
 .toko-1-2 {
   padding: 8px;
+  margin-bottom: 16px;
+}
+
+#worktitle1,
+#worktitle2,
+#worktitle3,
+#worktitle4 {
+  border: solid 1px black;
+  border-radius: 3px;
+  margin-left: 24px;
+}
+
+#kaisetsu1,
+#kaisetsu2,
+#kaisetsu3,
+#kaisetsu4 {
+  width: 50vw;
+  border: solid 1px black;
+  border-radius: 3px;
+}
+
+.w-time {
+  display: flex;
+  /* justify-content: center; */
+  min-width: 50vw;
+  margin-bottom: 16px;
+}
+
+#worktime1,
+#worktime2,
+#worktime3,
+#worktime4 {
+  border: solid 1px black;
+  border-radius: 3px;
+  margin-left: 24px;
 }
 
 .toko-2 {
@@ -122,6 +185,7 @@ textarea {
 
 .toko-2-1 {
   padding: 8px;
+  margin-top: 64px;
 }
 
 #work-comment {
@@ -165,13 +229,14 @@ textarea {
 }
 
 .blogBox {
-  width: 50%; /*2つずつ折り返す*/
+  width: 25%; /*2つずつ折り返す*/
   display: flex;
   justify-content: center;
   align-items: stretch;
   flex-direction: column;
   padding: 16px 8px;
   background-color: rgb(219, 215, 205);
+  margin-bottom: 16px;
 }
 
 .blogBox:hover {
@@ -182,7 +247,7 @@ textarea {
   background-color: rgb(253, 240, 232);
 }
 
-.blogBox:nth-child(4n-3):hover,
+.blogBox:nth-child(4n-2):hover,
 .blogBox:nth-child(4n-4):hover {
   transform: scale(1.05);
   transition: 0.5s all;
@@ -192,7 +257,7 @@ textarea {
 }
 
 /* チェック模様になるように配色 */
-.blogBox:nth-child(4n-3),
+.blogBox:nth-child(4n-2),
 .blogBox:nth-child(4n-4) {
   background-color: rgb(219, 234, 237);
 }
@@ -213,12 +278,13 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap; /* 画像が横に並ぶように改行する */
   padding: 8px;
   height: auto;
 }
 
 .pictureArea {
-  width: 50%;
+  width: 33.3%;
   height: auto;
   padding-bottom: 50%; /* アスペクト比を 2:1 にする場合 */
   position: relative;
@@ -232,11 +298,21 @@ textarea {
   right: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+}
+
+.pictureArea-top {
+  width: 100%; /* 上の段の画像は幅を100%に設定して横一列に表示 */
+  height: 0;
+  padding-bottom: 100%; /* 上の段の画像はアスペクト比を 1:1 にする場合 */
+  position: relative;
+  overflow: hidden; /* 画像がはみ出た部分を隠すためにオーバーフローを隠す */
 }
 
 .textDataArea {
   min-width: 50%;
+  min-height: 96px;
+  font-size: 0.8em;
   height: auto;
   padding-left: 16px;
 }
@@ -246,17 +322,17 @@ textarea {
   /* ユーザーの改行位置を再現するためのコード */
 }
 
+.go-btn {
+  text-align: center;
+  margin: 64px;
+}
+
 button {
   background-color: #d43041;
   color: white;
   border-radius: 3px;
   font-size: 1.5em;
   width: auto;
-}
-
-#user-pages iframe {
-  width: 100vw;
-  height: 30vh;
 }
 
 /*どの部分のcssに対して

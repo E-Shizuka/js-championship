@@ -1,0 +1,323 @@
+/*全体共通
+最初から設定してあるので特に変更
+しなくても大丈夫です♪
+-----------------*/
+
+@font-face {
+  font-family: "MyKokoro";
+  src: url("./../font/Kokoro.eot");
+  /* IE9 Compat Modes */
+  src: url("./../font/Kokoro.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("./../font/Kokoro.otf") format("opentype");
+  /* Safari, Android, iOS */
+}
+
+body {
+  font-family: Garamond, "MyKokoro", serif;
+  src: url("https://cdn.leafscape.be/kokoro/Kokoro_web.woff2") format("woff2");
+  line-height: 1.75;
+  font-size: 16px;
+  user-select: none;
+}
+
+button,
+select,
+input,
+select,
+textarea {
+  font-family: Garamond, "Kokoro", "こころ明朝体", serif;
+  src: url("https://cdn.leafscape.be/kokoro/Kokoro_web.woff2") format("woff2");
+}
+
+/*パディングをサイズ内側にする処理*/
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/*ーーーーーーーーーーー*/
+/*この下から記述*/
+/*ーーーーーーーーーーー*/
+
+.portfolioArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 64px;
+  margin-right: 64px;
+}
+
+.art-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 64px;
+  margin-right: 64px;
+}
+
+.editArea {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.editArea button {
+  margin: 16px;
+}
+
+.artwork {
+  width: 100vw;
+  height: auto;
+  margin: 64px;
+  margin-top: 0;
+}
+
+.portfolio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: auto;
+  padding-left: 64px;
+  padding-right: 64px;
+}
+
+.picturezone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 50vw;
+  height: auto;
+  padding-left: 64px;
+}
+
+.picturezone img {
+  width: auto;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.textzone {
+  min-width: 50vw;
+  padding-right: 64px;
+}
+
+.firstArea h2 {
+  font-size: 5em;
+}
+
+.firstArea p,
+.firstArea button {
+  font-size: 1.5em;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#logout {
+  float: right;
+  margin-top: 8px;
+  margin-right: 8px;
+}
+
+.titleBox {
+  text-align: center;
+  font-size: 2em;
+  background: url(../img/keshiki-5.jpg);
+  background-size: cover;
+}
+
+.inputArea {
+  background-color: rgb(253, 240, 232);
+}
+
+.toko-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 8px;
+}
+
+.toko-1-1 {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 3px;
+  border: solid 1px black;
+  width: auto;
+  min-width: 25%;
+}
+
+.toko-1-2 {
+  padding: 8px;
+}
+
+.toko-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: auto;
+}
+
+.toko-2-1 {
+  padding: 8px;
+}
+
+#text {
+  min-width: 50vw;
+  border: solid 1px black;
+  border-radius: 3px;
+}
+
+.info-t {
+  padding-top: 24px;
+  padding-left: 24px;
+  font-size: 1.2em;
+}
+
+.infoArea {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-right: 24px;
+}
+
+.info-p {
+  font-size: 0.8em;
+  text-align: left;
+}
+
+#reload {
+  align-self: flex-end;
+  font-size: 1.4em;
+}
+
+#output {
+  display: flex;
+  flex-wrap: wrap; /*折返し指定*/
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  /* background-color: rgb(231, 252, 243); */
+  width: 100vw;
+}
+
+.blogBox {
+  width: 50%; /*2つずつ折り返す*/
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: column;
+  padding: 16px 8px;
+  background-color: rgb(219, 215, 205);
+}
+
+.blogBox:hover {
+  transform: scale(1.05);
+  transition: 0.5s all;
+  z-index: 1000;
+  top: -10px;
+  background-color: rgb(253, 240, 232);
+}
+
+.blogBox:nth-child(4n-3):hover,
+.blogBox:nth-child(4n-4):hover {
+  transform: scale(1.05);
+  transition: 0.5s all;
+  z-index: 1000;
+  top: -10px;
+  background-color: rgb(253, 240, 232);
+}
+
+/* チェック模様になるように配色 */
+.blogBox:nth-child(4n-3),
+.blogBox:nth-child(4n-4) {
+  background-color: rgb(219, 234, 237);
+}
+
+/* 奇数の場合、最後の要素に対してmargin-left: auto; を適用する */
+.blogBox:last-child {
+  margin-right: auto;
+}
+
+.titleArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding: 16px; */
+}
+
+.contentArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  height: auto;
+}
+
+.pictureArea {
+  width: 50%;
+  height: auto;
+  padding-bottom: 50%; /* アスペクト比を 2:1 にする場合 */
+  position: relative;
+}
+
+.pictureArea img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.textDataArea {
+  min-width: 50%;
+  height: auto;
+  padding-left: 16px;
+}
+
+#docDateText {
+  white-space: pre-wrap;
+  /* ユーザーの改行位置を再現するためのコード */
+}
+
+.go-btn {
+  text-align: center;
+  margin: 64px;
+}
+
+button {
+  background-color: #d43041;
+  color: white;
+  border-radius: 3px;
+  font-size: 1.5em;
+  width: auto;
+}
+
+/*どの部分のcssに対して
+命令をしているのかコメントを
+記載しよう！
+---------------------*/
+
+/*
+---------------------*/
+
+/*
+---------------------*/
+
+/*
+---------------------*/
+
+/*
+---------------------*/

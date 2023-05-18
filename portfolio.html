@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>portfolio</title>
+    <meta name="description" content="ポートフォリオ" />
+    <meta property="og:title" content="ポートフォリオ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="#" />
+    <meta property="og:site_name" content="ポートフォリオ" />
+    <meta property="og:description" content="ポートフォリオ" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="canonical" href="#" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/sanitize.css" />
+    <link
+      href="https://fonts.googleapis.com/earlyaccess/kokoro.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style2.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div>
+      <h2>作品広場</h2>
+    </div>
+    <div id="output"></div>
+    <div class="go-btn">
+      <button type="button" id="go-back">前のページヘ戻る</button>
+    </div>
+    <script type="module" src="firebase-portfoliodata.js"></script>
+    <script>
+      // 日時をいい感じの形式にする関数 自分で作る時はライブラリから持ってきたほうがいい
+      function convertTimestampToDatetime(timestamp) {
+        const _d = timestamp ? new Date(timestamp * 1000) : new Date();
+        const Y = _d.getFullYear();
+        const m = (_d.getMonth() + 1).toString().padStart(2, "0");
+        const d = _d.getDate().toString().padStart(2, "0");
+        const H = _d.getHours().toString().padStart(2, "0");
+        const i = _d.getMinutes().toString().padStart(2, "0");
+        const s = _d.getSeconds().toString().padStart(2, "0");
+        return `${Y}/${m}/${d} ${H}:${i}:${s}`;
+      }
+    </script>
+  </body>
+</html>
