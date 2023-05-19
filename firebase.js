@@ -35,7 +35,7 @@ if (loginData) {
 }
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD35elexPRpTWGpTPLButa3_0-j-0sBMr0",
+  apiKey: ,
   authDomain: "social-app-70653.firebaseapp.com",
   projectId: "social-app-70653",
   storageBucket: "social-app-70653.appspot.com",
@@ -109,6 +109,7 @@ $("#send").on("click", function () {
           console.log("Uploaded a file 3!");
           uploadBytes(spaceRef4, file4).then((snapshot4) => {
             console.log("Uploaded a file 4!");
+            alert("画像のアップロードが完了しました。");
             const postData = {
               name: $("#nameP").text(), //name
               title: $("#titleP").val(), //title
